@@ -5,6 +5,7 @@ from kivy.uix.widget import Widget
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.image import Image
+from kivy.uix.button import Button
 
 class Sticker(Image):
   def on_touch_move(self, touch):
@@ -12,7 +13,7 @@ class Sticker(Image):
       self.x = touch.x - (self.width / 2)
       self.y = touch.y - (self.height / 2)
 
-class StickerBookBarButton(Widget):
+class StickerBookBarButton(Button):
   pass
 
 class StickerBookBar(BoxLayout):
