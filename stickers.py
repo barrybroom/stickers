@@ -21,7 +21,7 @@ class StickerBookBar(BoxLayout):
 class GameMenu(Widget):
   pass
 
-class GameLayout(Widget):
+class GameLayout(FloatLayout):
   pass
 
 

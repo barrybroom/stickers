@@ -4,6 +4,10 @@
       source: 'monster-background.png'
       size: self.size
 
+  StickerBookBar:
+    size_hint: .08, .7
+    pos_hint: {'center_x':.5, 'center_y':.5}
+
   Sticker:
     id: monster_1
     source: 'monster01.png'
@@ -12,8 +16,13 @@
 
 
 <StickerBookBar>:
+  canvas:
+    Color:
+      rgba: 1, 1, 0, .8
+    Rectangle:
+      size: self.size
 
-<StikcerBookBarButton>:
+<StickerBookBarButton>:
 
 <Sticker>:
 
