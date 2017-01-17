@@ -14,10 +14,19 @@ class Sticker(Image):
       self.y = touch.y - (self.height / 2)
 
 class StickerBookBarButton(Button):
-  pass
+  def on_touch_down(self, touch):
+    self.add_widget(Sticker())
 
 class StickerBookBar(BoxLayout):
-  pass
+  def __init__(self, **kwargs):
+    super(StickerBookBar, self).__init__(**kwargs)
+    self.orientation = 'vertical'
+    self.add_widget(StickerBookBarButton(text='A'))
+    self.add_widget(StickerBookBarButton(text='B'))
+    self.add_widget(StickerBookBarButton(text='C'))
+    self.add_widget(StickerBookBarButton(text='D'))
+    self.add_widget(StickerBookBarButton(text='E'))
+
 
 class GameMenu(Widget):
   pass

@@ -9,7 +9,6 @@
     pos_hint: {'center_x': .05, 'center_y': .5}
 
   Sticker:
-    id: monster_1
     source: 'monster01.png'
     height: 300
     width: 300
@@ -21,23 +20,6 @@
       rgba: 1, 1, 0, .8
     Rectangle:
       size: self.size
-  BoxLayout:
-    orientation: 'vertical'
-    Button:
-      id: button1
-      text: 'A'
-    Button:
-      id: button2
-      text: 'B'
-    Button:
-      id: button3
-      text: 'C'
-    Button:
-      id: button4
-      text: 'D'
-    Button:
-      id: button5
-      text: 'E'
 
 <StickerBookBarButton>:
   canvas:
