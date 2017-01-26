@@ -7,6 +7,7 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.image import Image
 from kivy.uix.button import Button
 from kivy.properties import StringProperty
+from kivy.properties import ListProperty
 
 class Sticker(Image):
   def __init__(self, **kwargs):
@@ -16,13 +17,22 @@ class Sticker(Image):
 
   def on_touch_move(self, touch):
     if 'pos' in touch.profile:
-      self.x = touch.x - (self.width / 2)
-      self.y = touch.y - (self.height / 2)
+      if self.collide_point(*touch.pos):
+        self.x = touch.x - (self.width / 2)
+        self.y = touch.y - (self.height / 2)
+        return True
 
 class StickerBookBarButton(Button):
-  sticker_source = StringProperty()    
+  sticker_source = StringProperty()
+  pressed = ListProperty([0,0])    
 
   def on_touch_down(self, touch):
+    if self.collide_point(*touch.pos):
+      self.pressed = touch.pos
+      return True
+    return super(StickerBookBarButton, self).on_touch_down(touch)
+
+  def on_pressed(self, instance, pos):
     self.add_widget(Sticker(source = self.sticker_source))
 
 class StickerBookBar(BoxLayout):
