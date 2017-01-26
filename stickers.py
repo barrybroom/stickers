@@ -8,19 +8,35 @@ from kivy.uix.image import Image
 from kivy.uix.button import Button
 from kivy.properties import StringProperty
 from kivy.properties import ListProperty
+from kivy.properties import BooleanProperty
 
 class Sticker(Image):
+  is_moving = BooleanProperty()
+
   def __init__(self, **kwargs):
     super(Sticker, self).__init__(**kwargs)
     self.height = 300
     self.width = 300
 
-  def on_touch_move(self, touch):
+  def on_touch_down(self, touch):
     if 'pos' in touch.profile:
       if self.collide_point(*touch.pos):
-        self.x = touch.x - (self.width / 2)
-        self.y = touch.y - (self.height / 2)
+        self.is_moving = True
         return True
+      return super(Sticker, self).on_touch_down(touch)
+
+  def on_touch_move(self, touch):
+    if self.is_moving:
+      self.x = touch.x - (self.width / 2)
+      self.y = touch.y - (self.height / 2)
+
+  def on_touch_up(self, touch):
+    if 'pos' in touch.profile:
+      if self.collide_point(*touch.pos):
+        self.is_moving = False
+        return True
+      return super(Sticker, self).on_touch_down(touch)
+    
 
 class StickerBookBarButton(Button):
   sticker_source = StringProperty()
