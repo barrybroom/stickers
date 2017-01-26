@@ -51,6 +51,7 @@ class StickerBookBarButton(Button):
   def on_pressed(self, instance, pos):
     self.add_widget(Sticker(source = self.sticker_source))
 
+
 class StickerBookBar(BoxLayout):
   def __init__(self, **kwargs):
     super(StickerBookBar, self).__init__(**kwargs)

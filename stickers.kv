@@ -5,6 +5,12 @@
       size: self.size
 
   StickerBookBar:
+    canvas.before:
+      Color:
+        rgba: 1, 1, 0, 0.5
+      Rectangle:
+        pos: self.pos
+        size: self.size
     size_hint: .08, .7
     pos_hint: {'center_x': .05, 'center_y': .5}
 
