@@ -10,6 +10,11 @@ from kivy.properties import StringProperty
 from kivy.properties import ListProperty
 from kivy.properties import BooleanProperty
 
+root = {}
+sticker_number = 0
+stickers_in_use = {}
+sticker_moving_id = ''
+
 class Sticker(Image):
   is_moving = BooleanProperty()
 
@@ -19,9 +24,12 @@ class Sticker(Image):
     self.width = 300
 
   def on_touch_down(self, touch):
+    global sticker_moving_id
+
     if 'pos' in touch.profile:
       if self.collide_point(*touch.pos):
         self.is_moving = True
+        sticker_moving_id = self.id
         return True
       return super(Sticker, self).on_touch_down(touch)
 
@@ -49,7 +57,14 @@ class StickerBookBarButton(Image):
     return super(StickerBookBarButton, self).on_touch_down(touch)
 
   def on_pressed(self, instance, pos):
-    self.add_widget(Sticker(source = self.sticker_source))
+    global sticker_number, stickers_in_use
+    sticker_number = sticker_number + 1
+    sticker_id = 'sticker_' + str(sticker_number)
+    s = Sticker(id = sticker_id, source = self.sticker_source)
+    stickers_in_use[sticker_id] = s
+    root.add_widget(s)
+    print 'Added ' + sticker_id
+    print stickers_in_use
 
 
 class StickerBookBar(BoxLayout):
@@ -62,9 +77,13 @@ class StickerBookBar(BoxLayout):
 
 class MenuButton(Widget):
   def on_touch_move(self, touch):
+    global sticker_moving_id, stickers_in_use
     if 'pos' in touch.profile:
-      if self.collide_point(*touch.pos):
-        print 'Delete me'
+      if self.collide_point(*touch.pos) & len(sticker_moving_id) > 0:
+        print 'Delete ' + sticker_moving_id
+        root.remove_widget(stickers_in_use[sticker_moving_id])
+        stickers_in_use.pop(sticker_moving_id)
+        sticker_moving_id = ''
         return True
       return super(MenuButton, self).on_touch_move(touch)
 
@@ -78,7 +97,9 @@ class GameLayout(FloatLayout):
 class stickersApp(App):
 
   def build(self):
-    return GameLayout()
+    global root
+    root =  GameLayout()
+    return root
 
 if __name__ == '__main__':
   stickersApp().run()
