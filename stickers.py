@@ -38,7 +38,7 @@ class Sticker(Image):
       return super(Sticker, self).on_touch_down(touch)
     
 
-class StickerBookBarButton(Button):
+class StickerBookBarButton(Image):
   sticker_source = StringProperty()
   pressed = ListProperty([0,0])    
 
@@ -56,9 +56,9 @@ class StickerBookBar(BoxLayout):
   def __init__(self, **kwargs):
     super(StickerBookBar, self).__init__(**kwargs)
     self.orientation = 'vertical'
-    self.add_widget(StickerBookBarButton(id='btn01', text='A', sticker_source='monster01.png'))
-    self.add_widget(StickerBookBarButton(id='btn02', text='B', sticker_source='monster02.png'))
-    self.add_widget(StickerBookBarButton(id='btn03', text='C', sticker_source='monster03.png'))
+    self.add_widget(StickerBookBarButton(id='btn01', source='monster01.png', sticker_source='monster01.png'))
+    self.add_widget(StickerBookBarButton(id='btn02', source='monster02.png', sticker_source='monster02.png'))
+    self.add_widget(StickerBookBarButton(id='btn03', source='monster03.png', sticker_source='monster03.png'))
 
 
 class GameMenu(Widget):
