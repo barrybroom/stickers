@@ -14,6 +14,16 @@
     size_hint: .08, .7
     pos_hint: {'center_x': .05, 'center_y': .5}
 
+  MenuButton:
+    canvas.before:
+      Color:
+        rgba: 1, 1, 0, 0.5
+      Rectangle:
+        pos: self.pos
+        size: self.size
+    size_hint: .1, .1
+    pos_hint: {'center_x': .95, 'center_y': .95}
+
 
 <StickerBookBar>:
 
@@ -28,3 +38,4 @@
 
 <GameMenu>:
 
+<MenuButton>:

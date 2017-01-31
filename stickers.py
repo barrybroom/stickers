@@ -60,6 +60,13 @@ class StickerBookBar(BoxLayout):
     self.add_widget(StickerBookBarButton(id='btn02', source='monster02.png', sticker_source='monster02.png'))
     self.add_widget(StickerBookBarButton(id='btn03', source='monster03.png', sticker_source='monster03.png'))
 
+class MenuButton(Widget):
+  def on_touch_move(self, touch):
+    if 'pos' in touch.profile:
+      if self.collide_point(*touch.pos):
+        print 'Delete me'
+        return True
+      return super(MenuButton, self).on_touch_move(touch)
 
 class GameMenu(Widget):
   pass
