@@ -33,9 +33,6 @@ class Sticker(Image):
         self.is_moving = True
         sticker_moving_id = self.id
         return True
-      else:
-        self.is_moving - False
-        print 'Did not touch sticker ' + str(self.id)
       return super(Sticker, self).on_touch_down(touch)
 
   def on_touch_move(self, touch):
@@ -77,6 +74,8 @@ class StickerBookBar(BoxLayout):
   def __init__(self, **kwargs):
     super(StickerBookBar, self).__init__(**kwargs)
     self.orientation = 'vertical'
+    self.spacing = 20
+    self.padding = 5
     self.add_widget(StickerBookBarButton(id='btn01', source='monster01.png', sticker_source='monster01.png'))
     self.add_widget(StickerBookBarButton(id='btn02', source='monster02.png', sticker_source='monster02.png'))
     self.add_widget(StickerBookBarButton(id='btn03', source='monster03.png', sticker_source='monster03.png'))
@@ -86,12 +85,13 @@ class MenuButton(Widget):
   def on_touch_move(self, touch):
     global sticker_moving_id, stickers_in_use
     if 'pos' in touch.profile:
-      if self.collide_point(*touch.pos) & len(sticker_moving_id) > 0:
-        print 'Delete ' + sticker_moving_id
-        root.remove_widget(stickers_in_use[sticker_moving_id])
-        stickers_in_use.pop(sticker_moving_id)
-        sticker_moving_id = ''
-        return True
+      if self.collide_point(*touch.pos):
+        if len(sticker_moving_id) > 0:
+          print 'Delete ' + sticker_moving_id
+          root.remove_widget(stickers_in_use[sticker_moving_id])
+          stickers_in_use.pop(sticker_moving_id)
+          sticker_moving_id = ''
+          return True
       return super(MenuButton, self).on_touch_move(touch)
 
 class GameMenu(Widget):
