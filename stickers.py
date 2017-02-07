@@ -28,8 +28,6 @@ class Sticker(Image):
 
     if 'pos' in touch.profile:
       if self.collide_point(*touch.pos):
-        # Sticker collision detection not working as expected
-        print 'Touched sticker ' + str(self.id) + ' at pos x = ' + str(touch.pos[0]) + ', ' + str(touch.pos[1])
         self.is_moving = True
         sticker_moving_id = self.id
         return True
