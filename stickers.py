@@ -20,17 +20,22 @@ class Sticker(Image):
 
   def __init__(self, **kwargs):
     super(Sticker, self).__init__(**kwargs)
-    self.height = 300
-    self.width = 300
+    self.height = 200
+    self.width = 200
 
   def on_touch_down(self, touch):
     global sticker_moving_id
 
     if 'pos' in touch.profile:
       if self.collide_point(*touch.pos):
+        # Sticker collision detection not working as expected
+        print 'Touched sticker ' + str(self.id) + ' at pos x = ' + str(touch.pos[0]) + ', ' + str(touch.pos[1])
         self.is_moving = True
         sticker_moving_id = self.id
         return True
+      else:
+        self.is_moving - False
+        print 'Did not touch sticker ' + str(self.id)
       return super(Sticker, self).on_touch_down(touch)
 
   def on_touch_move(self, touch):
@@ -53,6 +58,7 @@ class StickerBookBarButton(Image):
   def on_touch_down(self, touch):
     if self.collide_point(*touch.pos):
       self.pressed = touch.pos
+      print 'Pressed sticker book bar button'
       return True
     return super(StickerBookBarButton, self).on_touch_down(touch)
 
@@ -74,6 +80,7 @@ class StickerBookBar(BoxLayout):
     self.add_widget(StickerBookBarButton(id='btn01', source='monster01.png', sticker_source='monster01.png'))
     self.add_widget(StickerBookBarButton(id='btn02', source='monster02.png', sticker_source='monster02.png'))
     self.add_widget(StickerBookBarButton(id='btn03', source='monster03.png', sticker_source='monster03.png'))
+
 
 class MenuButton(Widget):
   def on_touch_move(self, touch):
