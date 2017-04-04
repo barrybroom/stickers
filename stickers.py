@@ -74,9 +74,10 @@ class StickerBookBar(BoxLayout):
     self.orientation = 'vertical'
     self.spacing = 20
     self.padding = 5
-    self.add_widget(StickerBookBarButton(id='btn01', source='monster01.png', sticker_source='monster01.png'))
-    self.add_widget(StickerBookBarButton(id='btn02', source='monster02.png', sticker_source='monster02.png'))
-    self.add_widget(StickerBookBarButton(id='btn03', source='monster03.png', sticker_source='monster03.png'))
+    self.add_widget(StickerBookBarButton(id='btn01', source='anna-2.png', sticker_source='anna-2.png'))
+    self.add_widget(StickerBookBarButton(id='btn02', source='elsa.png', sticker_source='elsa.png'))
+    self.add_widget(StickerBookBarButton(id='btn03', source='kristoff.png', sticker_source='kristoff.png'))
+    self.add_widget(StickerBookBarButton(id='btn04', source='olaf.png', sticker_source='olaf.png'))
 
 
 class MenuButton(Widget):
